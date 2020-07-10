@@ -367,7 +367,7 @@ static int get_uart_modes(int port, int mode, int **uart_modes_values)
 		sprintf(target_uart_mode_key, "UART_MODES");
 		if (obj_get_int(config, "GPIO_PINS_PER_UART_PORT", &num_of_gpio_pins) < 0)
 			return -5; /* E_CONFERR */
-	} else if (!strcmp(method, "FILEPATH")) {
+	} else if (!strcmp(method, "FILEPATH") || !strcmp(method, "FILEPATH_IOCTL")) {
 		if (obj_get_arr(config, "UART_PORTS_GROUP", &uart_ports_group) < 0)
 			return -5; /* E_CONFERR */
 		if (obj_get_int(config, "FILEPATH_PER_UART_PORT", &num_of_gpio_pins) < 0)
@@ -689,6 +689,43 @@ static int get_uart_mode_filepath(int port, int *mode)
 	return -52; /* E_UART_UNKMODE */
 }
 
+static int set_uart_mode_filepath_ioctl(int port, int mode)
+{
+	struct array_list *uart_ports_method;
+	const char *sub_method;
+
+	if (obj_get_arr(config, "UART_PORTS_METHOD", &uart_ports_method) < 0)
+		return -5; /* E_CONFERR */
+
+	if (arr_get_str(uart_ports_method, port, &sub_method) < 0)
+		return -5; /* E_CONFERR */
+
+	if (strcmp(sub_method, "IOCTL") == 0)
+		return set_uart_mode_ioctl(port, mode);
+	else if (strcmp(sub_method, "FILEPATH") == 0)
+		return set_uart_mode_filepath(port, mode);
+
+	return -5; /* E_CONFERR */
+}
+
+static int get_uart_mode_filepath_ioctl(int port, int *mode)
+{
+	struct array_list *uart_ports_method;
+	const char *sub_method;
+
+	if (obj_get_arr(config, "UART_PORTS_METHOD", &uart_ports_method) < 0)
+		return -5; /* E_CONFERR */
+
+	if (arr_get_str(uart_ports_method, port, &sub_method) < 0)
+		return -5; /* E_CONFERR */
+
+	if (strcmp(sub_method, "IOCTL") == 0)
+		return get_uart_mode_ioctl(port, mode);
+	else if (strcmp(sub_method, "FILEPATH") == 0)
+		return get_uart_mode_filepath(port, mode);
+
+	return -52; /* E_UART_UNKMODE */
+}
 /*
  * APIs
  */
@@ -759,6 +796,8 @@ int mx_uart_set_mode(int port, int mode)
 		return set_uart_mode_gpio_ioctl(port, mode);
 	else if (strcmp(method, "FILEPATH") == 0)
 		return set_uart_mode_filepath(port, mode);
+	else if (strcmp(method, "FILEPATH_IOCTL") == 0)
+		return set_uart_mode_filepath_ioctl(port, mode);
 
 	return -5; /* E_CONFERR */
 }
@@ -790,6 +829,8 @@ int mx_uart_get_mode(int port, int *mode)
 		return get_uart_mode_gpio_ioctl(port, mode);
 	else if (strcmp(method, "FILEPATH") == 0)
 		return get_uart_mode_filepath(port, mode);
+	else if (strcmp(method, "FILEPATH_IOCTL") == 0)
+		return get_uart_mode_filepath_ioctl(port, mode);
 
 	return -5; /* E_CONFERR */
 }
