@@ -16,7 +16,7 @@
 
 ### Example1: UC-8580
 
-```
+```json
 {
 	"CONFIG_VERSION": "1.1.0",
 
@@ -32,7 +32,7 @@
 
 ### Example2: UC-5111-LX
 
-```
+```json
 {
 	"CONFIG_VERSION":"1.1.1",
 
@@ -64,7 +64,7 @@
 
 ### Example3: MC-1200
 
-```
+```json
 {
     "CONFIG_VERSION": "1.1.2",
     "METHOD": "FILEPATH",
@@ -105,7 +105,7 @@
 - On board it8786: /dev/ttyM0 ~ /dev/ttyM1
 - Expansion UART board: /dev/ttyM2 ~ /dev/ttyM9
 
-```
+```json
 {
     "CONFIG_VERSION": "1.1.2",
     "METHOD": "FILEPATH",
@@ -213,7 +213,7 @@
 
 ### Example5: UC-8410A
 
-```
+```json
 {
 	"CONFIG_VERSION":"1.1.3",
 	
@@ -230,5 +230,68 @@
 		"/dev/ttyM6",
 		"/dev/ttyM7"
 	]
+}
+```
+
+### Example6: DA-681A (CN)
+
+```json
+{
+    "CONFIG_VERSION": "1.1.3",
+    "METHOD": "FILEPATH_IOCTL",
+    "NUM_OF_UART_PORTS": 12,
+    "UART_PORTS": [
+            "/dev/ttyM0",
+            "/dev/ttyM1",
+            "/dev/ttyM2",
+            "/dev/ttyM3",
+            "/dev/ttyM4",
+            "/dev/ttyM5",
+            "/dev/ttyM6",
+            "/dev/ttyM7",
+            "/dev/ttyM8",
+            "/dev/ttyM9",
+            "/dev/ttyM10",
+            "/dev/ttyM11"
+    ],
+    "UART_PORTS_METHOD": [
+            "FILEPATH",
+            "FILEPATH",
+            "IOCTL",
+            "IOCTL",
+            "IOCTL",
+            "IOCTL",
+            "IOCTL",
+            "IOCTL",
+            "IOCTL",
+            "IOCTL",
+            "IOCTL",
+            "IOCTL"
+    ],
+    "UART_PORTS_GROUP": [
+            "1",
+            "1"
+    ],
+    "FILEPATH_PER_UART_PORT": 4,
+    "FILEPATH_OF_UART_PORTS": [
+        [
+            "/sys/class/gpio/gpio139/value",
+            "/sys/class/gpio/gpio137/value",
+            "/sys/class/gpio/gpio138/value",
+            "/sys/class/misc/it87_serial/serial1/serial1_rs485"
+        ],
+        [
+            "/sys/class/gpio/gpio142/value",
+            "/sys/class/gpio/gpio140/value",
+            "/sys/class/gpio/gpio141/value",
+            "/sys/class/misc/it87_serial/serial2/serial2_rs485"
+        ]
+    ],
+    "NUM_OF_UART_MODE": 3,
+    "UART_MODES_GROUP1": [
+            [1, 0, 0, 0],
+            [0, 1, 0, 1],
+            [0, 0, 1, 1]
+    ]
 }
 ```
