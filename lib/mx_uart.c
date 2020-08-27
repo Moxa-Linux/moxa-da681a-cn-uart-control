@@ -55,7 +55,7 @@ static struct uart_port_struct *uart_ports;
 static int def_uart_modes_values[3][4] = {
 	{1, 1, 0, 0}, /* RS232 */
 	{0, 0, 0, 1}, /* RS485_2W */
-	{0, 0, 1, 0}  /* RS422_RS485_4W */
+	{0, 0, 1, 0}  /* RS422 */
 };
 /*
  * do not change the order and cancel any one
@@ -780,7 +780,8 @@ int mx_uart_set_mode(int port, int mode)
 		return -2; /* E_INVAL */
 
 	if (mode != UART_MODE_RS232 && mode != UART_MODE_RS485_2W
-		&& mode != UART_MODE_RS422_RS485_4W)
+		&& mode != UART_MODE_RS422
+		&& mode != UART_MODE_RS485_4W)
 		return -2; /* E_INVAL */
 
 	if (obj_get_str(config, "METHOD", &method) < 0)

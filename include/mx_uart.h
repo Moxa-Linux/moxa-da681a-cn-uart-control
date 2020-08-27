@@ -27,7 +27,8 @@
 enum uart_mode {
 	UART_MODE_RS232 = 0,
 	UART_MODE_RS485_2W = 1,
-	UART_MODE_RS422_RS485_4W = 2
+	UART_MODE_RS422 = 2,
+	UART_MODE_RS485_4W = 3
 };
 
 enum {

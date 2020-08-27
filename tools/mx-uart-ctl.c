@@ -43,7 +43,8 @@ void usage(FILE *fp)
 	fprintf(fp, "		Set target port to uart_mode\n");
 	fprintf(fp, "		0 --> set to RS232 mode\n");
 	fprintf(fp, "		1 --> set to RS485-2W mode\n");
-	fprintf(fp, "		2 --> set to RS422/RS485-4W mode\n");
+	fprintf(fp, "		2 --> set to RS422 mode\n");
+	fprintf(fp, "		3 --> set to RS485-4W mode\n");
 	fprintf(fp, "\n");
 	fprintf(fp, "Example:\n");
 	fprintf(fp, "	Get mode from port 0\n");
@@ -79,8 +80,11 @@ void show_uart_mode_message(int mode)
 	case UART_MODE_RS485_2W:
 		printf("Current uart mode is RS485-2W interface.\n");
 		break;
-	case UART_MODE_RS422_RS485_4W:
-		printf("Current uart mode is RS422/RS485-4W interface.\n");
+	case UART_MODE_RS422:
+		printf("Current uart mode is RS422 interface.\n");
+		break;
+	case UART_MODE_RS485_4W:
+		printf("Current uart mode is RS485-4W interface.\n");
 		break;
 	default:
 		printf("Unknown interface is set.\n");
