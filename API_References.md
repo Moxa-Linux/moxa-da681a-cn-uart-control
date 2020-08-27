@@ -16,7 +16,7 @@ Set state for target Digital Output port.
 
 #### Parameters
 * port: target DOUT port number
-* mode: UART_MODE_RS232 or UART_MODE_RS485_2W or UART_MODE_RS422_RS485_4W
+* mode: UART_MODE_RS232 or UART_MODE_RS485_2W or UART_MODE_RS422 or UART_MODE_RS485_4W
 
 #### Return value
 * 0 on success.

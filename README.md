@@ -37,7 +37,8 @@ OPTIONS:
 		Set target port to uart_mode
 		0 --> set to RS232 mode
 		1 --> set to RS485-2W mode
-		2 --> set to RS422/RS485-4W mode
+		2 --> set to RS422 mode
+		3 --> set to RS485-4W mode
 
 Example:
 	Get mode from port 0
