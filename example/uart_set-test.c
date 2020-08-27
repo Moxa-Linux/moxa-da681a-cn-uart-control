@@ -26,7 +26,10 @@ void show_uart_mode_message(int mode)
 		printf("  Current uart mode is RS485-2W interface.\n");
 		break;
 	case UART_MODE_RS422_RS485_4W:
-		printf("  Current uart mode is RS422/RS485-4W interface.\n");
+		printf("  Current uart mode is RS422 interface.\n");
+		break;
+	case UART_MODE_RS485_4W:
+		printf("  Current uart mode is RS485-4W interface.\n");
 		break;
 	default:
 		printf("  Unknown interface is set.\n");
@@ -88,8 +91,8 @@ int main(int argc, char *argv[])
 	show_uart_mode_message(mode);
 	sleep(1);
 
-	printf("- Setting to RS422/RS485-4W mode\n");
-	ret = mx_uart_set_mode(uart_port, UART_MODE_RS422_RS485_4W);
+	printf("- Setting to RS422 mode\n");
+	ret = mx_uart_set_mode(uart_port, UART_MODE_RS422);
 	if (ret < 0) {
 		fprintf(stderr, "Error: Failed to set UART port %d\n", uart_port);
 		fprintf(stderr, "Return code: %d\n", ret);
@@ -104,6 +107,24 @@ int main(int argc, char *argv[])
 	}
 	show_uart_mode_message(mode);
 	sleep(1);
+
+	printf("- Setting to RS485-4W mode\n");
+	ret = mx_uart_set_mode(uart_port, UART_MODE_RS485_4W);
+	if (ret < 0) {
+		fprintf(stderr, "Error: Failed to set UART port %d\n", uart_port);
+		fprintf(stderr, "Return code: %d\n", ret);
+		exit(1);
+	}
+	printf("- Getting UART port mode\n");
+	ret = mx_uart_get_mode(uart_port, &mode);
+	if (ret < 0) {
+		fprintf(stderr, "Error: Failed to get UART port %d\n", uart_port);
+		fprintf(stderr, "Return code: %d\n", ret);
+		exit(1);
+	}
+	show_uart_mode_message(mode);
+	sleep(1);
+
 
 	printf("========================================\n");
 	printf("Test done.\n");
