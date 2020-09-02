@@ -1,0 +1,2 @@
+usr/include/moxa/mx_uart.h
+usr/lib/*/libmx_uart_ctl.so
