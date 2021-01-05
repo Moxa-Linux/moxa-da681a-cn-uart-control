@@ -1,0 +1,42 @@
+Source: moxa-uart-control
+Priority: required
+Maintainer: Elvis CW Yao <ElvisCW.Yao@moxa.com>
+Uploaders: Elvis CW Yao <ElvisCW.Yao@moxa.com>
+Build-Depends: debhelper (>= 10),
+               libmoxa-gpio-control-dev (>= 1.0.0),
+               libjson-c-dev
+Standards-Version: 4.1.2
+Section: libs
+Homepage: https://www.moxa.com/
+
+Package: libmoxa-da681a-cn-uart-control1
+Architecture: any
+Multi-Arch: same
+Pre-Depends: ${misc:Pre-Depends}
+Depends: ${shlibs:Depends},
+         ${misc:Depends},
+         libmoxa-gpio-control1 (>= 1.0.0),
+         libjson-c3
+Description: Moxa UART control library - shared library
+ UART control library can control the mode of UART.
+ Custom version for DA-681A (CN).
+
+Package: libmoxa-da681a-cn-uart-control-dev
+Architecture: any
+Multi-Arch: same
+Section: libdevel
+Depends: libmoxa-da681a-cn-uart-control1 (= ${binary:Version}),
+         ${misc:Depends}
+Description: Moxa UART control library - development files
+ UART control library can control the mode of UART.
+ Custom version for DA-681A (CN).
+
+Package: moxa-da681a-cn-uart-control
+Architecture: any
+Section: utils
+Depends: libmoxa-da681a-cn-uart-control1 (= ${binary:Version}),
+         ${shlibs:Depends},
+         ${misc:Depends}
+Description: Moxa UART control utility
+ Utility to control the mode of UART in Moxa computers
+ Custom version for DA-681A (CN).

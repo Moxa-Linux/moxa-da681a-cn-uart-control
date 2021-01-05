@@ -1,0 +1,44 @@
+variables:
+    GIT_DEPTH: "1"
+
+stages:
+    - mil-cv-internal-release_build
+    - prepare_mil-cv-internal-release_debs
+
+mil-cv-internal-release_build:
+    tags:
+        - Runner-Buster
+    stage: mil-cv-internal-release_build
+    script:
+        - echo "deb http://mil-internal-apt:8080/mirror-debian_20201211/debian/ buster main" > /etc/apt/sources.list
+        - echo "deb http://mil-internal-apt:8080/mil-internal-release buster main" >> /etc/apt/sources.list
+        - curl -fsSL http://mil-internal-apt:8080/mil_internal_apt.gpg | apt-key add -
+        - apt-get update
+        - apt-get install -y --allow-unauthenticated
+          libmoxa-gpio-control-dev:amd64 build-essential libjson-c-dev
+        - apt-get build-dep ./ -y
+        - dpkg-buildpackage -us -uc -b -aamd64
+        - mv ../*.deb .
+        - mv ../*.buildinfo .
+        - mv ../*.changes .
+    artifacts:
+        name: "${CI_PROJECT_NAME}"
+        paths:
+        - ./*.deb
+        - ./*.buildinfo
+        - ./*.changes
+
+prepare_mil-cv-internal-release_debs:
+    tags:
+        - Runner-Buster
+    stage: prepare_mil-cv-internal-release_debs
+    only:
+      refs:
+        - buster/cv-da681a-cn/master
+    dependencies:
+        - mil-cv-internal-release_build
+    when: manual
+    script:
+        - mkdir -p /cache/buster/mil-cv-internal-release/
+        - cp *.deb /cache/buster/mil-cv-internal-release/
+        - ls /cache/buster/mil-cv-internal-release/

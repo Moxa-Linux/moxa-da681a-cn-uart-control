@@ -1,0 +1,5 @@
+moxa-uart-control (1.1.7+da681a+cn+deb10) buster; urgency=medium
+
+  * Initial Release for custom version of DA-681A (CN).
+
+ -- Elvis Yao (姚家瑋) <ElvisCW.Yao@moxa.com>  Mon, 28 Dec 2020 14:32:18 +0800
