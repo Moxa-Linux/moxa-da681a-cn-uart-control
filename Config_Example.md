@@ -102,8 +102,6 @@
 ```
 
 ### Example4: DA-820C
-- On board it8786: /dev/ttyM0 ~ /dev/ttyM1
-- Expansion UART board: /dev/ttyM2 ~ /dev/ttyM9
 
 ```json
 {
@@ -233,7 +231,7 @@
 }
 ```
 
-### Example6: DA-681A (CN)
+### Example6: DA-681A-WL (CN)
 
 ```json
 {
